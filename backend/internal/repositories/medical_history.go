@@ -93,9 +93,6 @@ func (mhr *MedicalHistoryRepository) UpdateMedicalHistory(medicalHistory models.
 		medicalHistory.Vaccination,
 	)
 	if err != nil {
-		return err
-	}
-	if err != nil {
 		return ErrDatabaseUpdatingError
 	}
 
