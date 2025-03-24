@@ -1,0 +1,2266 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "DicDoc Service",
+    "description": "DicDoc Service",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "paths": {
+    "/api/v1/appointments": {
+      "get": {
+        "tags": [
+          "appointments"
+        ],
+        "summary": "Получить записи",
+        "description": "Получить все записи из таблицы Appointments",
+        "operationId": "get-appointments",
+        "parameters": [
+          {
+            "name": "doctor_id",
+            "in": "query",
+            "description": "Идентификатор врача",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "patient_id",
+            "in": "query",
+            "description": "Идентификатор пациента",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/dto.GetAppointmentResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "appointments"
+        ],
+        "summary": "Создать запись",
+        "description": "Создать запись пациента к врачу",
+        "operationId": "create-appointment",
+        "requestBody": {
+          "description": "Информация о создаваемой записи",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditAppointmentRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditAppointmentResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Appointment"
+      }
+    },
+    "/api/v1/appointments/{id}": {
+      "get": {
+        "tags": [
+          "appointments"
+        ],
+        "summary": "Получение записи по идентификатору",
+        "description": "Получить запись по идентификатору в таблице Appointments",
+        "operationId": "get-appointments-by-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор записи",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Запись",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.GetAppointmentResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Запись не найдена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "appointments"
+        ],
+        "summary": "Изменить запись",
+        "description": "Изменить запись в таблице Appointments",
+        "operationId": "edit-appointment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор записи",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Информация о изменяемой записи",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditAppointmentRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditAppointmentResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Запись не найдена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Appointment"
+      },
+      "delete": {
+        "tags": [
+          "appointments"
+        ],
+        "summary": "Удалить запись",
+        "description": "Удалить запись в таблице Appointments",
+        "operationId": "cancel-appointment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор записи",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Запись успешно удалена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Запись не найдена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/doctors": {
+      "get": {
+        "tags": [
+          "doctors"
+        ],
+        "summary": "Получить список врачей",
+        "description": "Получить всех врачей из таблицы Doctors",
+        "operationId": "get-doctors",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/dto.GetDoctorResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "doctors"
+        ],
+        "summary": "Добавить врача",
+        "description": "Добавить врача в таблицу Doctors",
+        "operationId": "add-doctor",
+        "requestBody": {
+          "description": "Информация о враче",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditDoctorRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditDoctorResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Doctor"
+      }
+    },
+    "/api/v1/doctors/{id}": {
+      "get": {
+        "tags": [
+          "doctors"
+        ],
+        "summary": "Получение врача по идентификатору",
+        "description": "Получить врача по идентификатору в таблице Doctors",
+        "operationId": "get-doctor-by-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор врача",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Врач",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.GetDoctorResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Запись не найдена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "doctors"
+        ],
+        "summary": "Изменить информацию о враче",
+        "description": "Изменить информацию о враче в таблице Doctors",
+        "operationId": "edit-doctor",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор врача",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Информация о изменяемом враче",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditDoctorRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditDoctorResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Doctor"
+      }
+    },
+    "/api/v1/doctors/{id}/workdays": {
+      "get": {
+        "tags": [
+          "doctors"
+        ],
+        "summary": "Получение расписания врача по его идентификатору",
+        "description": "Получить  расписание врача по его идентификатору в таблице TimeTable",
+        "operationId": "get-timetable-by-doctor-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор врача",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Расписание",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/dto.GetTimetableResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/locations": {
+      "get": {
+        "tags": [
+          "locations"
+        ],
+        "summary": "Получение рабочих кабинетов по идентификатору врача",
+        "description": "Получить кабинеты по идентификатору врача в таблице TimeTable",
+        "operationId": "get-locations-by-doctor-id",
+        "parameters": [
+          {
+            "name": "doctor_id",
+            "in": "query",
+            "description": "Идентификатор врача",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация о кабинетах",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/dto.GetOfficeResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/offices": {
+      "get": {
+        "tags": [
+          "offices"
+        ],
+        "summary": "Получить список кабинетов",
+        "description": "Получить все кабинеты из таблицы Offices",
+        "operationId": "get-offices",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/dto.GetOfficeResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "offices"
+        ],
+        "summary": "Добавить кабинет",
+        "description": "Добавить кабинет в таблицу offices",
+        "operationId": "add-office",
+        "requestBody": {
+          "description": "Информация о кабинете",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditOfficeRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditOfficeResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Office"
+      }
+    },
+    "/api/v1/offices/{id}": {
+      "get": {
+        "tags": [
+          "offices"
+        ],
+        "summary": "Получение информации о кабинете по идентификатору",
+        "description": "Получить информацию о кабинете по идентификатору в таблице Offices",
+        "operationId": "get-office-by-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор кабинета",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Кабинет",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.GetOfficeResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Запись не найдена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "offices"
+        ],
+        "summary": "Изменить информацию о кабинете",
+        "description": "Изменить информацию о каибинете в таблице Offices",
+        "operationId": "edit-office",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор кабинета",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Информация о изменяемом кабинете",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditOfficeRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditOfficeResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Office"
+      }
+    },
+    "/api/v1/patients": {
+      "get": {
+        "tags": [
+          "patients"
+        ],
+        "summary": "Получить список пациентов",
+        "description": "Получить всех пациентов из таблицы Patients",
+        "operationId": "get-patients",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/dto.GetPatientResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "patients"
+        ],
+        "summary": "Добавить пациента",
+        "description": "Добавить пациента в таблицу Patients",
+        "operationId": "add-patient",
+        "requestBody": {
+          "description": "Информация о пациенте",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditPatientRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditPatientResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Patient"
+      }
+    },
+    "/api/v1/patients/{id}": {
+      "get": {
+        "tags": [
+          "patients"
+        ],
+        "summary": "Получение пациента по идентификатору",
+        "description": "Получить пациента по идентификатору в таблице Patients",
+        "operationId": "get-patient-by-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пациента",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пациент",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.GetPatientResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Запись не найдена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "patients"
+        ],
+        "summary": "Изменить информацию о пациенте",
+        "description": "Изменить информацию о пациенте в таблице Patients",
+        "operationId": "edit-patient",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пациента",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Информация о изменяемом пациенте",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditPatientRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditPatientResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "Patient"
+      }
+    },
+    "/api/v1/patients/{id}/medical_history": {
+      "get": {
+        "tags": [
+          "medicalHistories"
+        ],
+        "summary": "Получение медкарты пациента по его идентификатору",
+        "description": "Получить медкарту пациента в таблице medical_history",
+        "operationId": "get-medical-history-by-patient-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пациента",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Медицинская карта",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.GetMedicalHistoryResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Запись не найдена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "medicalHistories"
+        ],
+        "summary": "Создать медкарту пациента",
+        "description": "Создать медкарту в таблице medical_histories",
+        "operationId": "create-medical-history",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пациента",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Информация о медкарте",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditMedicalHistoryRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditMedicalHistoryResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "MedicalHistory"
+      },
+      "patch": {
+        "tags": [
+          "medicalHistories"
+        ],
+        "summary": "Изменить медкарту",
+        "description": "Изменить медкарту в таблице medical_histories",
+        "operationId": "update-medical-history",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор пациента",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Информация о медкарте",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.CreateOrEditMedicalHistoryRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.CreateOrEditMedicalHistoryResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Пользователь не имеет доступа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "medicalHistory"
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Вход в систему",
+        "description": "Войти в систему по логину и паролю",
+        "operationId": "login",
+        "requestBody": {
+          "description": "Логин и пароль пользователя",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.UserLoginRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о пользователе и JWT-токен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.UserLoginResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Пользователь не авторизован",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Пользователь не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "loginInfo"
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Регистрация пользователя",
+        "description": "Добавить пользователя в таблицу Users",
+        "operationId": "register",
+        "requestBody": {
+          "description": "Информация о пользователе",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dto.UserRegisterRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Идентификатор нового пользователя",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.UserRegisterResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные данные",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dto.ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-codegen-request-body-name": "registerInfo"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "dto.CreateOrEditAppointmentRequestDto": {
+        "type": "object",
+        "properties": {
+          "dateTime": {
+            "type": "string",
+            "description": "Дата и время записи"
+          },
+          "doctorId": {
+            "type": "integer",
+            "description": "Идентификатор врача"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор записи"
+          },
+          "patientId": {
+            "type": "integer",
+            "description": "Идентификатор пациента"
+          }
+        },
+        "description": "Информация о записи при создании или изменении"
+      },
+      "dto.CreateOrEditAppointmentResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор записи"
+          }
+        },
+        "description": "Информация о записи при создании или изменении"
+      },
+      "dto.CreateOrEditDoctorRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Почта врача"
+          },
+          "fio": {
+            "type": "string",
+            "description": "ФИО врача"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Телефон врача"
+          },
+          "specialization": {
+            "type": "string",
+            "description": "Специализация врача"
+          }
+        },
+        "description": "Информация о враче при создании или изменении"
+      },
+      "dto.CreateOrEditDoctorResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор врача"
+          }
+        },
+        "description": "Информация о враче при создании или изменении"
+      },
+      "dto.CreateOrEditMedicalHistoryRequestDto": {
+        "type": "object",
+        "properties": {
+          "allergies": {
+            "type": "string",
+            "description": "Аллергии"
+          },
+          "bloodType": {
+            "type": "string",
+            "description": "Группа крови"
+          },
+          "chronicDiseases": {
+            "type": "string",
+            "description": "Хронические заболевания"
+          },
+          "vaccination": {
+            "type": "string",
+            "description": "Вакцинации"
+          }
+        },
+        "description": "Информация о медкарте при создании или изменении"
+      },
+      "dto.CreateOrEditMedicalHistoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор медкарты"
+          }
+        },
+        "description": "Информация о медкарте при создании или изменении"
+      },
+      "dto.CreateOrEditOfficeRequestDto": {
+        "type": "object",
+        "properties": {
+          "floor": {
+            "type": "integer",
+            "description": "Этаж"
+          },
+          "number": {
+            "type": "integer",
+            "description": "Номер кабинета"
+          }
+        },
+        "description": "Информация о кабинете при создании или изменении"
+      },
+      "dto.CreateOrEditOfficeResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор кабинета"
+          }
+        },
+        "description": "Информация о кабинете при создании или изменении"
+      },
+      "dto.CreateOrEditPatientRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Почта пациента"
+          },
+          "fio": {
+            "type": "string",
+            "description": "ФИО пациента"
+          },
+          "insurance": {
+            "type": "string",
+            "description": "Страховка пациента"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Телефон пациента"
+          }
+        },
+        "description": "Информация о пациенте при создании или изменении"
+      },
+      "dto.CreateOrEditPatientResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор пациента"
+          }
+        },
+        "description": "Информация о пациенте при создании или изменении"
+      },
+      "dto.ErrorDto": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Ошибка"
+          }
+        },
+        "description": "Информация об ошибке (DTO)"
+      },
+      "dto.GetAppointmentResponseDto": {
+        "type": "object",
+        "properties": {
+          "dateTime": {
+            "type": "string",
+            "description": "Дата и время записи"
+          },
+          "doctorId": {
+            "type": "integer",
+            "description": "Идентификатор врача"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор записи"
+          },
+          "patientId": {
+            "type": "integer",
+            "description": "Идентификатор пациента"
+          }
+        },
+        "description": "Информация о записи при получении"
+      },
+      "dto.GetDoctorResponseDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Почта врача"
+          },
+          "fio": {
+            "type": "string",
+            "description": "ФИО врача"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор врача"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Телефон врача"
+          },
+          "specialization": {
+            "type": "string",
+            "description": "Специализация врача"
+          }
+        },
+        "description": "Информация о враче при получении"
+      },
+      "dto.GetMedicalHistoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "allergies": {
+            "type": "string",
+            "description": "Аллергии"
+          },
+          "bloodType": {
+            "type": "string",
+            "description": "Группа крови"
+          },
+          "chronicDiseases": {
+            "type": "string",
+            "description": "Хронические заболевания"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор медкарты"
+          },
+          "patientId": {
+            "type": "integer",
+            "description": "Идентификатор пациента"
+          },
+          "vaccination": {
+            "type": "string",
+            "description": "Вакцинации"
+          }
+        },
+        "description": "Информация о медкарте при получении"
+      },
+      "dto.GetOfficeResponseDto": {
+        "type": "object",
+        "properties": {
+          "floor": {
+            "type": "integer",
+            "description": "Этаж"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор кабинета"
+          },
+          "number": {
+            "type": "integer",
+            "description": "Номер кабинета"
+          }
+        },
+        "description": "Информация о кабинете при получении"
+      },
+      "dto.GetPatientResponseDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Почта пациента"
+          },
+          "fio": {
+            "type": "string",
+            "description": "ФИО пациента"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор пациента"
+          },
+          "insurance": {
+            "type": "string",
+            "description": "Страховка пациента"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Телефон пациента"
+          }
+        },
+        "description": "Информация о пациенте при получении"
+      },
+      "dto.GetTimetableResponseDto": {
+        "type": "object",
+        "properties": {
+          "doctorId": {
+            "type": "integer",
+            "description": "Идентификатор врача"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор записи в таблице"
+          },
+          "officeId": {
+            "type": "integer",
+            "description": "Идентификатор кабинета"
+          },
+          "workDay": {
+            "type": "integer",
+            "description": "Номер рабочего дня"
+          }
+        },
+        "description": "Информация о расписании при получении"
+      },
+      "dto.UserDto": {
+        "type": "object",
+        "properties": {
+          "doctorId": {
+            "type": "integer",
+            "description": "Идентификатор врач (если пользователь - врач)"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор пользователя"
+          },
+          "login": {
+            "type": "string",
+            "description": "Логин пользователя"
+          },
+          "password": {
+            "type": "string",
+            "description": "Пароль пользователя"
+          },
+          "patientId": {
+            "type": "integer",
+            "description": "Идентификатор пациента (если пользователь - пациент)"
+          },
+          "role": {
+            "type": "integer",
+            "description": "Роль пользователя (Админ, Пациент, Врач)"
+          }
+        },
+        "description": "Информация о пользователе"
+      },
+      "dto.UserLoginRequestDto": {
+        "type": "object",
+        "properties": {
+          "login": {
+            "type": "string",
+            "description": "Логин пользователя"
+          },
+          "password": {
+            "type": "string",
+            "description": "Пароль пользователя"
+          }
+        },
+        "description": "Информация о пользователе при попытке входа"
+      },
+      "dto.UserLoginResponseDto": {
+        "type": "object",
+        "properties": {
+          "jwtToken": {
+            "type": "string",
+            "description": "JWT-токен"
+          },
+          "user": {
+            "type": "object",
+            "description": "Информация о пользователе",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/dto.UserDto"
+              }
+            ]
+          }
+        },
+        "description": "Информация о пользователе при попытке входа"
+      },
+      "dto.UserRegisterRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Почта пользователя"
+          },
+          "fio": {
+            "type": "string",
+            "description": "ФИО пользователя"
+          },
+          "insurance": {
+            "type": "string",
+            "description": "Страховка пользователя (если пользователь - пациент)"
+          },
+          "login": {
+            "type": "string",
+            "description": "Логин пользователя"
+          },
+          "password": {
+            "type": "string",
+            "description": "Пароль пользователя"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Телефон пользователя"
+          },
+          "role": {
+            "type": "integer",
+            "description": "Роль пользователя"
+          },
+          "specialization": {
+            "type": "string",
+            "description": "Специализация пользователя (если пользователь - врач)"
+          }
+        },
+        "description": "Информация о пользователе при попытке регистрации"
+      },
+      "dto.UserRegisterResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор пользователя"
+          }
+        },
+        "description": "Информация о пользователе при попытке регистрации"
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "description": "Authorization check",
+        "name": "auth-x",
+        "in": "header"
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}
