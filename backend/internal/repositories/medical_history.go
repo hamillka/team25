@@ -13,8 +13,6 @@ const (
 	selectHistoryByPatient = "SELECT * FROM medical_histories WHERE patientid = $1"
 	createMedicalHistory   = "INSERT INTO medical_histories " +
 		"(chronic_diseases, allergies, blood_type, vaccination, patientID) VALUES ($1, $2, $3, $4, $5) RETURNING id"
-	//updateMedicalHistory = "UPDATE medical_histories " +
-	//	"SET chronic_diseases = $2, allergies = $3, blood_type = $4, vaccination = $5 WHERE patientid = $1 RETURNING id"
 
 	updateMedicalHistory = "UPDATE medical_histories " +
 		"SET " +

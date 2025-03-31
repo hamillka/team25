@@ -7,7 +7,6 @@ import (
 type MedicalHistoryRepository interface {
 	GetHistoryByPatient(id int64) (models.MedicalHistory, error)
 	CreateMedicalHistory(chronicDiseases, allergies, bloodType, vaccination string, patientID int64) (int64, error)
-	//UpdateMedicalHistory(id int64, chronicDiseases, allergies, bloodType, vaccination string) (int64, error)
 	UpdateMedicalHistory(medicalHistory models.MedicalHistory) error
 }
 

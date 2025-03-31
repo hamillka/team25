@@ -14,10 +14,6 @@ type AppointmentRepository struct {
 }
 
 const (
-	//createAppointment = "INSERT INTO " +
-	//	"appointments (patientID, doctorID, dateTime) " +
-	//	"VALUES ($1, $2, $3) " +
-	//	"RETURNING id"
 	createAppointment = "SELECT * from add_appointment($1, $2, $3)"
 	updateAppointment = "UPDATE appointments SET doctorid = $2, patientid = $3, datetime = $4 " +
 		"WHERE id = $1 RETURNING id"
