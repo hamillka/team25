@@ -36,7 +36,7 @@ func NewUserHandler(s UserService, logger *zap.SugaredLogger, port string) *User
 func createToken(role int64) (string, error) {
 	payload := jwt.MapClaims{
 		"role": role,
-		"exp":  time.Now().Add(time.Hour * 720).Unix(),
+		"exp":  time.Now().Add(time.Hour * 12).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, payload)
