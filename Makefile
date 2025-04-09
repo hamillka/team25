@@ -13,6 +13,10 @@ run-reminder:
 	echo "Starting reminder service..."
 	cd reminder && docker-compose up -d
 
+run-frontend:
+	echo "Starting frontend..."
+	cd frontend && npm start
+
 clean:
 	echo "Cleaning up..."
 	cd backend && make stop
