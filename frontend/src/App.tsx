@@ -27,66 +27,66 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="//register" element={<Register />} />
+          <Route path="/register" element={<Register />} />
 
-          <Route path="//api/admin" element={<Admin />} />
+          <Route path="/api/admin" element={<Admin />} />
           <Route
-            path="//api/admin/appointment_get"
+            path="/api/admin/appointment_get"
             element={<AppointmentGet />}
           />
           <Route
-            path="//api/admin/appointment_add"
+            path="/api/admin/appointment_add"
             element={<AppointmentAdd />}
           />
           <Route
-            path="//api/admin/appointment_edit"
+            path="/api/admin/appointment_edit"
             element={<AppointmentEdit />}
           />
           <Route
-            path="//api/admin/appointment_delete"
+            path="/api/admin/appointment_delete"
             element={<AppointmentDelete />}
           />
-          <Route path="//api/admin/doctors_get" element={<DoctorsGet />} />
-          <Route path="//api/admin/patients_get" element={<PatientsGet />} />
+          <Route path="/api/admin/doctors_get" element={<DoctorsGet />} />
+          <Route path="/api/admin/patients_get" element={<PatientsGet />} />
 
-          <Route path="//api/patient" element={<Patient />} />
+          <Route path="/api/patient" element={<Patient />} />
           <Route
-            path="//api/patient/appointment_delete"
+            path="/api/patient/appointment_delete"
             element={<MyAppointmentDelete />}
           />
           <Route
-            path="//api/patient/appointment_add"
+            path="/api/patient/appointment_add"
             element={<MyAppointmentAdd />}
           />
           <Route
-            path="//api/patient/appointments_get"
+            path="/api/patient/appointments_get"
             element={<MyAppointmentsGet />}
           />
           <Route
-            path="//api/patient/appointment_edit"
+            path="/api/patient/appointment_edit"
             element={<MyAppointmentEdit />}
           />
           <Route
-            path="//api/patient/medhistory_get"
+            path="/api/patient/medhistory_get"
             element={<GetMyMedHistory />}
           />
 
-          <Route path="//api/doctor" element={<Doctor />} />
+          <Route path="/api/doctor" element={<Doctor />} />
 
           <Route
-            path="//api/doctor/appointment_get"
+            path="/api/doctor/appointment_get"
             element={<AppointmentsGet />}
           />
           <Route
-            path="//api/doctor/medhistory_get"
+            path="/api/doctor/medhistory_get"
             element={<GetMedHistory />}
           />
           <Route
-            path="//api/doctor/medhistory_create"
+            path="/api/doctor/medhistory_create"
             element={<CreateMedHistory />}
           />
           <Route
-            path="//api/doctor/medhistory_update"
+            path="/api/doctor/medhistory_update"
             element={<UpdateMedHistory />}
           />
         </Routes>
