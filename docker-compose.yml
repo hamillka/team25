@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: postgres
     volumes:
-      - ./scripts/1-init.sql:/docker-entrypoint-initdb.d/1-init.sql
+      - ./backend/scripts/1-init.sql:/docker-entrypoint-initdb.d/1-init.sql
       - db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
@@ -18,18 +18,40 @@ services:
   dicdoc-service:
     container_name: dicdoc-service
     build:
-      context: ./
+      context: ./backend
     ports:
       - "8080:8080"
     depends_on:
       - postgres
-    links:
-      - postgres
     restart: on-failure
     env_file:
-      - configs/cfg.env
+      - ./backend/configs/cfg.env
     networks:
       - shared_network
+
+  reminder-service:
+    container_name: reminder-service
+    build:
+      context: ./reminder
+    ports:
+      - "8081:8081"
+    restart: on-failure
+    env_file:
+      - ./reminder/configs/cfg.env
+    networks:
+      - shared_network
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: on-failure
+    networks:
+      - shared_network
+
 volumes:
   db-data:
     external: true
