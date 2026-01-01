@@ -1,0 +1,1261 @@
+definitions:
+  dto.CreateOrEditAppointmentRequestDto:
+    description: Информация о записи при создании или изменении
+    properties:
+      dateTime:
+        description: Дата и время записи
+        type: string
+      doctorId:
+        description: Идентификатор врача
+        type: integer
+      id:
+        description: Идентификатор записи
+        type: integer
+      patientId:
+        description: Идентификатор пациента
+        type: integer
+    type: object
+  dto.CreateOrEditAppointmentResponseDto:
+    description: Информация о записи при создании или изменении
+    properties:
+      id:
+        description: Идентификатор записи
+        type: integer
+    type: object
+  dto.CreateOrEditDoctorRequestDto:
+    description: Информация о враче при создании или изменении
+    properties:
+      email:
+        description: Почта врача
+        type: string
+      fio:
+        description: ФИО врача
+        type: string
+      phoneNumber:
+        description: Телефон врача
+        type: string
+      specialization:
+        description: Специализация врача
+        type: string
+    type: object
+  dto.CreateOrEditDoctorResponseDto:
+    description: Информация о враче при создании или изменении
+    properties:
+      id:
+        description: Идентификатор врача
+        type: integer
+    type: object
+  dto.CreateOrEditMedicalHistoryRequestDto:
+    description: Информация о медкарте при создании или изменении
+    properties:
+      allergies:
+        description: Аллергии
+        type: string
+      bloodType:
+        description: Группа крови
+        type: string
+      chronicDiseases:
+        description: Хронические заболевания
+        type: string
+      vaccination:
+        description: Вакцинации
+        type: string
+    type: object
+  dto.CreateOrEditMedicalHistoryResponseDto:
+    description: Информация о медкарте при создании или изменении
+    properties:
+      id:
+        description: Идентификатор медкарты
+        type: integer
+    type: object
+  dto.CreateOrEditOfficeRequestDto:
+    description: Информация о кабинете при создании или изменении
+    properties:
+      floor:
+        description: Этаж
+        type: integer
+      number:
+        description: Номер кабинета
+        type: integer
+    type: object
+  dto.CreateOrEditOfficeResponseDto:
+    description: Информация о кабинете при создании или изменении
+    properties:
+      id:
+        description: Идентификатор кабинета
+        type: integer
+    type: object
+  dto.CreateOrEditPatientRequestDto:
+    description: Информация о пациенте при создании или изменении
+    properties:
+      email:
+        description: Почта пациента
+        type: string
+      fio:
+        description: ФИО пациента
+        type: string
+      insurance:
+        description: Страховка пациента
+        type: string
+      phoneNumber:
+        description: Телефон пациента
+        type: string
+    type: object
+  dto.CreateOrEditPatientResponseDto:
+    description: Информация о пациенте при создании или изменении
+    properties:
+      id:
+        description: Идентификатор пациента
+        type: integer
+    type: object
+  dto.ErrorDto:
+    description: Информация об ошибке (DTO)
+    properties:
+      error:
+        description: Ошибка
+        type: string
+    type: object
+  dto.GetAppointmentResponseDto:
+    description: Информация о записи при получении
+    properties:
+      dateTime:
+        description: Дата и время записи
+        type: string
+      doctorId:
+        description: Идентификатор врача
+        type: integer
+      id:
+        description: Идентификатор записи
+        type: integer
+      patientId:
+        description: Идентификатор пациента
+        type: integer
+    type: object
+  dto.GetDoctorResponseDto:
+    description: Информация о враче при получении
+    properties:
+      email:
+        description: Почта врача
+        type: string
+      fio:
+        description: ФИО врача
+        type: string
+      id:
+        description: Идентификатор врача
+        type: integer
+      phoneNumber:
+        description: Телефон врача
+        type: string
+      specialization:
+        description: Специализация врача
+        type: string
+    type: object
+  dto.GetMedicalHistoryResponseDto:
+    description: Информация о медкарте при получении
+    properties:
+      allergies:
+        description: Аллергии
+        type: string
+      bloodType:
+        description: Группа крови
+        type: string
+      chronicDiseases:
+        description: Хронические заболевания
+        type: string
+      id:
+        description: Идентификатор медкарты
+        type: integer
+      patientId:
+        description: Идентификатор пациента
+        type: integer
+      vaccination:
+        description: Вакцинации
+        type: string
+    type: object
+  dto.GetOfficeResponseDto:
+    description: Информация о кабинете при получении
+    properties:
+      floor:
+        description: Этаж
+        type: integer
+      id:
+        description: Идентификатор кабинета
+        type: integer
+      number:
+        description: Номер кабинета
+        type: integer
+    type: object
+  dto.GetPatientResponseDto:
+    description: Информация о пациенте при получении
+    properties:
+      email:
+        description: Почта пациента
+        type: string
+      fio:
+        description: ФИО пациента
+        type: string
+      id:
+        description: Идентификатор пациента
+        type: integer
+      insurance:
+        description: Страховка пациента
+        type: string
+      phoneNumber:
+        description: Телефон пациента
+        type: string
+    type: object
+  dto.GetTimetableResponseDto:
+    description: Информация о расписании при получении
+    properties:
+      doctorId:
+        description: Идентификатор врача
+        type: integer
+      id:
+        description: Идентификатор записи в таблице
+        type: integer
+      officeId:
+        description: Идентификатор кабинета
+        type: integer
+      workDay:
+        description: Номер рабочего дня
+        type: integer
+    type: object
+  dto.UserDto:
+    description: Информация о пользователе
+    properties:
+      doctorId:
+        description: Идентификатор врач (если пользователь - врач)
+        type: integer
+      id:
+        description: Идентификатор пользователя
+        type: integer
+      login:
+        description: Логин пользователя
+        type: string
+      password:
+        description: Пароль пользователя
+        type: string
+      patientId:
+        description: Идентификатор пациента (если пользователь - пациент)
+        type: integer
+      role:
+        description: Роль пользователя (Админ, Пациент, Врач)
+        type: integer
+    type: object
+  dto.UserLoginRequestDto:
+    description: Информация о пользователе при попытке входа
+    properties:
+      login:
+        description: Логин пользователя
+        type: string
+      password:
+        description: Пароль пользователя
+        type: string
+    type: object
+  dto.UserLoginResponseDto:
+    description: Информация о пользователе при попытке входа
+    properties:
+      jwtToken:
+        description: JWT-токен
+        type: string
+      user:
+        allOf:
+        - $ref: '#/definitions/dto.UserDto'
+        description: Информация о пользователе
+    type: object
+  dto.UserRegisterRequestDto:
+    description: Информация о пользователе при попытке регистрации
+    properties:
+      email:
+        description: Почта пользователя
+        type: string
+      fio:
+        description: ФИО пользователя
+        type: string
+      insurance:
+        description: Страховка пользователя (если пользователь - пациент)
+        type: string
+      login:
+        description: Логин пользователя
+        type: string
+      password:
+        description: Пароль пользователя
+        type: string
+      phoneNumber:
+        description: Телефон пользователя
+        type: string
+      role:
+        description: Роль пользователя
+        type: integer
+      specialization:
+        description: Специализация пользователя (если пользователь - врач)
+        type: string
+    type: object
+  dto.UserRegisterResponseDto:
+    description: Информация о пользователе при попытке регистрации
+    properties:
+      id:
+        description: Идентификатор пользователя
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: DicDoc Service
+  title: DicDoc Service
+  version: "1.0"
+paths:
+  /api/v1/appointments:
+    get:
+      consumes:
+      - application/json
+      description: Получить все записи из таблицы Appointments
+      operationId: get-appointments
+      parameters:
+      - description: Идентификатор врача
+        in: query
+        name: doctor_id
+        type: integer
+      - description: Идентификатор пациента
+        in: query
+        name: patient_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.GetAppointmentResponseDto'
+            type: array
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получить записи
+      tags:
+      - appointments
+    post:
+      consumes:
+      - application/json
+      description: Создать запись пациента к врачу
+      operationId: create-appointment
+      parameters:
+      - description: Информация о создаваемой записи
+        in: body
+        name: Appointment
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditAppointmentRequestDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditAppointmentResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Создать запись
+      tags:
+      - appointments
+  /api/v1/appointments/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Удалить запись в таблице Appointments
+      operationId: cancel-appointment
+      parameters:
+      - description: Идентификатор записи
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Запись успешно удалена
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "404":
+          description: Запись не найдена
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Удалить запись
+      tags:
+      - appointments
+    get:
+      consumes:
+      - application/json
+      description: Получить запись по идентификатору в таблице Appointments
+      operationId: get-appointments-by-id
+      parameters:
+      - description: Идентификатор записи
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Запись
+          schema:
+            $ref: '#/definitions/dto.GetAppointmentResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "404":
+          description: Запись не найдена
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получение записи по идентификатору
+      tags:
+      - appointments
+    put:
+      consumes:
+      - application/json
+      description: Изменить запись в таблице Appointments
+      operationId: edit-appointment
+      parameters:
+      - description: Идентификатор записи
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Информация о изменяемой записи
+        in: body
+        name: Appointment
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditAppointmentRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditAppointmentResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "404":
+          description: Запись не найдена
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Изменить запись
+      tags:
+      - appointments
+  /api/v1/doctors:
+    get:
+      consumes:
+      - application/json
+      description: Получить всех врачей из таблицы Doctors
+      operationId: get-doctors
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.GetDoctorResponseDto'
+            type: array
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получить список врачей
+      tags:
+      - doctors
+    post:
+      consumes:
+      - application/json
+      description: Добавить врача в таблицу Doctors
+      operationId: add-doctor
+      parameters:
+      - description: Информация о враче
+        in: body
+        name: Doctor
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditDoctorRequestDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditDoctorResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Добавить врача
+      tags:
+      - doctors
+  /api/v1/doctors/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Получить врача по идентификатору в таблице Doctors
+      operationId: get-doctor-by-id
+      parameters:
+      - description: Идентификатор врача
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Врач
+          schema:
+            $ref: '#/definitions/dto.GetDoctorResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "404":
+          description: Запись не найдена
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получение врача по идентификатору
+      tags:
+      - doctors
+    patch:
+      consumes:
+      - application/json
+      description: Изменить информацию о враче в таблице Doctors
+      operationId: edit-doctor
+      parameters:
+      - description: Идентификатор врача
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Информация о изменяемом враче
+        in: body
+        name: Doctor
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditDoctorRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditDoctorResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Изменить информацию о враче
+      tags:
+      - doctors
+  /api/v1/doctors/{id}/workdays:
+    get:
+      consumes:
+      - application/json
+      description: Получить  расписание врача по его идентификатору в таблице TimeTable
+      operationId: get-timetable-by-doctor-id
+      parameters:
+      - description: Идентификатор врача
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Расписание
+          schema:
+            items:
+              $ref: '#/definitions/dto.GetTimetableResponseDto'
+            type: array
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получение расписания врача по его идентификатору
+      tags:
+      - doctors
+  /api/v1/locations:
+    get:
+      consumes:
+      - application/json
+      description: Получить кабинеты по идентификатору врача в таблице TimeTable
+      operationId: get-locations-by-doctor-id
+      parameters:
+      - description: Идентификатор врача
+        in: query
+        name: doctor_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Информация о кабинетах
+          schema:
+            items:
+              $ref: '#/definitions/dto.GetOfficeResponseDto'
+            type: array
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получение рабочих кабинетов по идентификатору врача
+      tags:
+      - locations
+  /api/v1/offices:
+    get:
+      consumes:
+      - application/json
+      description: Получить все кабинеты из таблицы Offices
+      operationId: get-offices
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.GetOfficeResponseDto'
+            type: array
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получить список кабинетов
+      tags:
+      - offices
+    post:
+      consumes:
+      - application/json
+      description: Добавить кабинет в таблицу offices
+      operationId: add-office
+      parameters:
+      - description: Информация о кабинете
+        in: body
+        name: Office
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditOfficeRequestDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditOfficeResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Добавить кабинет
+      tags:
+      - offices
+  /api/v1/offices/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Получить информацию о кабинете по идентификатору в таблице Offices
+      operationId: get-office-by-id
+      parameters:
+      - description: Идентификатор кабинета
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Кабинет
+          schema:
+            $ref: '#/definitions/dto.GetOfficeResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "404":
+          description: Запись не найдена
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получение информации о кабинете по идентификатору
+      tags:
+      - offices
+    patch:
+      consumes:
+      - application/json
+      description: Изменить информацию о каибинете в таблице Offices
+      operationId: edit-office
+      parameters:
+      - description: Идентификатор кабинета
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Информация о изменяемом кабинете
+        in: body
+        name: Office
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditOfficeRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditOfficeResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Изменить информацию о кабинете
+      tags:
+      - offices
+  /api/v1/patients:
+    get:
+      consumes:
+      - application/json
+      description: Получить всех пациентов из таблицы Patients
+      operationId: get-patients
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.GetPatientResponseDto'
+            type: array
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получить список пациентов
+      tags:
+      - patients
+    post:
+      consumes:
+      - application/json
+      description: Добавить пациента в таблицу Patients
+      operationId: add-patient
+      parameters:
+      - description: Информация о пациенте
+        in: body
+        name: Patient
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditPatientRequestDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditPatientResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Добавить пациента
+      tags:
+      - patients
+  /api/v1/patients/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Получить пациента по идентификатору в таблице Patients
+      operationId: get-patient-by-id
+      parameters:
+      - description: Идентификатор пациента
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Пациент
+          schema:
+            $ref: '#/definitions/dto.GetPatientResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "404":
+          description: Запись не найдена
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получение пациента по идентификатору
+      tags:
+      - patients
+    patch:
+      consumes:
+      - application/json
+      description: Изменить информацию о пациенте в таблице Patients
+      operationId: edit-patient
+      parameters:
+      - description: Идентификатор пациента
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Информация о изменяемом пациенте
+        in: body
+        name: Patient
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditPatientRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditPatientResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Изменить информацию о пациенте
+      tags:
+      - patients
+  /api/v1/patients/{id}/medical_history:
+    get:
+      consumes:
+      - application/json
+      description: Получить медкарту пациента в таблице medical_history
+      operationId: get-medical-history-by-patient-id
+      parameters:
+      - description: Идентификатор пациента
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Медицинская карта
+          schema:
+            $ref: '#/definitions/dto.GetMedicalHistoryResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "404":
+          description: Запись не найдена
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Получение медкарты пациента по его идентификатору
+      tags:
+      - medicalHistories
+    patch:
+      consumes:
+      - application/json
+      description: Изменить медкарту в таблице medical_histories
+      operationId: update-medical-history
+      parameters:
+      - description: Идентификатор пациента
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Информация о медкарте
+        in: body
+        name: medicalHistory
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditMedicalHistoryRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditMedicalHistoryResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "403":
+          description: Пользователь не имеет доступа
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Изменить медкарту
+      tags:
+      - medicalHistories
+    post:
+      consumes:
+      - application/json
+      description: Создать медкарту в таблице medical_histories
+      operationId: create-medical-history
+      parameters:
+      - description: Идентификатор пациента
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Информация о медкарте
+        in: body
+        name: MedicalHistory
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrEditMedicalHistoryRequestDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.CreateOrEditMedicalHistoryResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Создать медкарту пациента
+      tags:
+      - medicalHistories
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Войти в систему по логину и паролю
+      operationId: login
+      parameters:
+      - description: Логин и пароль пользователя
+        in: body
+        name: loginInfo
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserLoginRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Информация о пользователе и JWT-токен
+          schema:
+            $ref: '#/definitions/dto.UserLoginResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "401":
+          description: Пользователь не авторизован
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "404":
+          description: Пользователь не найден
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Вход в систему
+      tags:
+      - user
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Добавить пользователя в таблицу Users
+      operationId: register
+      parameters:
+      - description: Информация о пользователе
+        in: body
+        name: registerInfo
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserRegisterRequestDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Идентификатор нового пользователя
+          schema:
+            $ref: '#/definitions/dto.UserRegisterResponseDto'
+        "400":
+          description: Некорректные данные
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          schema:
+            $ref: '#/definitions/dto.ErrorDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Регистрация пользователя
+      tags:
+      - user
+securityDefinitions:
+  ApiKeyAuth:
+    description: Authorization check
+    in: header
+    name: auth-x
+    type: apiKey
+swagger: "2.0"
